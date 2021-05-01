@@ -1,0 +1,77 @@
+<template>
+    <v-container>
+        <v-card >
+            <v-data-table
+                class="rounded"
+                :headers="headers"
+                :items="farmers"
+            >
+                <template v-slot:top>
+                    <v-toolbar flat rounded color="primary" dark>
+                        <v-toolbar-title>Farmers</v-toolbar-title>
+                        <v-spacer/>
+                        <v-text-field placeholder="Search" prepend-inner-icon="mdi-magnify" hide-details filled rounded dense></v-text-field>
+                        <v-spacer/>
+                        <v-btn text class="primary" :to="{name: 'add-farmer'}" rounded>
+                            <v-icon left>mdi-plus</v-icon>
+                            Add Farmer
+                        </v-btn>
+                    </v-toolbar>
+                </template>
+                <template v-slot:item.avatar="{item}">
+                    <v-avatar size="72">
+                        <v-img :src="item.picture"/>
+                    </v-avatar>
+                </template>
+                <template v-slot:item.phone="{item}">
+                    <a :href="`tel:${item.phone}`">{{item.phone}}</a>
+                </template>
+                <template v-slot:item.age="{item}">
+                    <span>{{getAge(item.date_of_birth)}}</span>
+                </template>
+                <template v-slot:item.farms="{item}">
+                    <v-btn outlined :to="{name: 'farmer-farms', params: {farmer_id: item._id}}" color="primary" rounded block>Farm</v-btn>
+                </template>
+                <template v-slot:item.details="{item}">
+                    <v-btn :to="{name: 'farmer', params: {id: item._id}}" color="primary" rounded block>Details</v-btn>
+                </template>
+            </v-data-table>
+        </v-card>
+    </v-container>
+</template>
+<script>
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
+export default {
+    name: 'farmers',
+    data: () => ({
+        headers: [
+            {align: 'center', text: 'Profile Img', value: 'avatar'},
+            // {align: 'center', text: 'ID', value: 'farmer_id'},
+            {align: 'center', text: 'Full Name', value: 'full_name'},
+            {align: 'center', text: 'Age', value: 'age'},
+            {align: 'center', text: 'Gender', value: 'gender'},
+            {align: 'center', text: 'Community', value: 'community'},
+            {align: 'center', text: 'Language', value: 'lang'},
+            {align: 'center', text: 'Phone Number', value: 'phone'},
+            {align: 'center', text: 'Farms', value: 'farms'},
+            {align: 'center', text: 'Details', value: 'details'},
+        ],
+        farmers: [],
+    }),
+    methods:{
+      getAge(date){
+          return dayjs(date).fromNow(true)
+      },
+    },
+    mounted() {
+        this.$axios.get('/farmer')
+            .then(res=>{
+                this.farmers = res.data
+            }).catch(err=>{
+            console.error(err)
+        })
+    }
+}
+</script>
