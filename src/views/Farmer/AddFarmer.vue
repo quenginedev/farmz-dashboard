@@ -64,11 +64,10 @@
                                             max-width="320"
                                             rounded="xl"
                                             v-model="show.date_of_birth"
-                                            :close-on-click="false"
                                             :close-on-content-click="false"
                                         >
                                             <template v-slot:activator="{on}">
-                                                <v-text-field @click="show.date_of_birth = true" readonly v-model="form.date_of_birth" label="Age" filled rounded></v-text-field>
+                                                <v-text-field v-on="on" @click="show.date_of_birth = true" readonly v-model="form.date_of_birth" label="Age" filled rounded></v-text-field>
                                             </template>
                                             <v-card>
                                                 <v-date-picker full-width v-model="form.date_of_birth"/>
@@ -158,8 +157,6 @@
                                                       filled/>
                                         <v-text-field v-model="form.source_income" label="Other source of income"
                                                       rounded filled/>
-                                        <v-text-field v-model.number="form.farms" type="number"
-                                                      label="Number of Farms" rounded filled/>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="4">
                                         <v-text-field
@@ -217,7 +214,6 @@
                 </v-stepper-items>
             </v-stepper>
         </v-card>
-        {{form.date_of_birth}}
     </v-container>
 </template>
 
@@ -261,7 +257,9 @@ export default {
                     console.log('saved farmer', res.data)
                     this.$router.push({name: 'farmers'})
                 }).catch(err => {
-                console.error(err)
+                    console.log(err)
+                    const message = err.response ? err.response.data.message : err.message
+                    this.$root.$emit('error', message)
             }).finally(() => {
                 this.loading = false
             })

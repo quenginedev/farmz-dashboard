@@ -21,7 +21,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Farmer/AddFarmer.vue')
   },
   {
-    path: '/farmer/:id',
+    path: '/farmer/:farmer_id',
     name: 'farmer',
     component: () => import('../views/Farmer/FarmerDetails')
   },
@@ -39,7 +39,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 })
 
 export default router

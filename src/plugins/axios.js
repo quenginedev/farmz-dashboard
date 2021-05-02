@@ -2,14 +2,15 @@
 
 import Vue from 'vue';
 import axios from "axios";
-
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://farmzghana.herokuapp.com/' : 'http://localhost:4000'
+console.log({baseURL })
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let config = {
-  baseURL: process.env.NODE_ENV ? 'https://farmzghana.herokuapp.com/' : 'http://localhost:4000'
+  baseURL
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };

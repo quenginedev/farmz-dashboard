@@ -25,7 +25,10 @@
                             <v-icon left>mdi-map-marker</v-icon>
                             Community: {{ farmer.community }}
                         </p>
-                    </div>
+                        <p class="body-1">
+                            <v-icon left>mdi-barn</v-icon>
+                            Farms: {{ farmer.farms }}
+                        </p>                    </div>
                     <v-divider/>
                     <ul>
                         <li>Household status: {{ farmer.household_status }}</li>
@@ -65,8 +68,9 @@ export default {
         }
     },
     mounted() {
-        this.$axios.get(`farmer/${this.$route.params.id}`)
+        this.$axios.get(`farmer/${this.$route.params.farmer_id}`)
             .then(res => {
+                console.log(res.data)
                 this.farmer = res.data
             }).finally(_ => {
             this.loading = false

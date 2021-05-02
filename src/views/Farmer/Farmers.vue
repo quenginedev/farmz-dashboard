@@ -23,6 +23,11 @@
                         <v-img :src="item.picture"/>
                     </v-avatar>
                 </template>
+                <template v-slot:item.farmer_id="{item}">
+                    <v-chip color="primary" >
+                        {{item.farmer_id}}
+                    </v-chip>
+                </template>
                 <template v-slot:item.phone="{item}">
                     <a :href="`tel:${item.phone}`">{{item.phone}}</a>
                 </template>
@@ -33,7 +38,7 @@
                     <v-btn outlined :to="{name: 'farmer-farms', params: {farmer_id: item._id}}" color="primary" rounded block>Farm</v-btn>
                 </template>
                 <template v-slot:item.details="{item}">
-                    <v-btn :to="{name: 'farmer', params: {id: item._id}}" color="primary" rounded block>Details</v-btn>
+                    <v-btn :to="{name: 'farmer', params: {farmer_id: item._id}}" color="primary" rounded block>Details</v-btn>
                 </template>
             </v-data-table>
         </v-card>
@@ -48,7 +53,7 @@ export default {
     data: () => ({
         headers: [
             {align: 'center', text: 'Profile Img', value: 'avatar'},
-            // {align: 'center', text: 'ID', value: 'farmer_id'},
+            {align: 'center', text: 'ID', value: 'farmer_id'},
             {align: 'center', text: 'Full Name', value: 'full_name'},
             {align: 'center', text: 'Age', value: 'age'},
             {align: 'center', text: 'Gender', value: 'gender'},
