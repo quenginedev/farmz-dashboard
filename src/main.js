@@ -4,8 +4,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
+import firebase from './plugins/firebase.plugin'
 
 Vue.config.productionTip = false
+
+Vue.use(firebase)
 
 new Vue({
   router,
