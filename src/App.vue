@@ -1,11 +1,11 @@
 <template>
-    <v-app>
+    <v-app id="doc">
         <v-snackbar app bottom rounded="pill" :color="error.color" v-model="error.show" class="text-capitalize">
             <v-icon left>mdi-alert-circle</v-icon>
             {{error.message}}
         </v-snackbar>
         <div v-if="isAuth">
-            <v-app-bar app flat color="primary" dark>
+            <v-app-bar app flat color="primary" dark class="hidden-print-only">
                 <v-icon @click="$router.go(-1)" v-if="$route.name !== 'home'" left>mdi-arrow-left</v-icon>
                 <v-icon v-else left>mdi-home</v-icon>
                 <v-spacer/>

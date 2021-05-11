@@ -2,35 +2,49 @@
     <v-container>
         <v-row justify="center">
             <v-progress-circular v-if="loading" indeterminate color="primary" size="72"/>
-            <v-card v-else-if="farmer" max-width="520" min-width="320" rounded="lg" class="mt-5">
-                <v-img :src="farmer.picture"/>
-                <v-card-title class="justify-start">
-                    <p class="text-h4">{{ farmer.full_name }}</p>
-                </v-card-title>
+            <v-card v-else-if="farmer" rounded="lg" class="mt-5">
+                <v-row justify="center" align="center">
+                    <v-col cols="12" sm="6" md="4">
+                        <v-img  :src="farmer.picture"/>
+                    </v-col>
+                    <v-col col="12" sm="6" md="8">
+                        <v-card-title class="justify-start text-h4">
+                            <span>{{ farmer.full_name }}</span>
+                            <v-spacer/>
+                            <v-btn :to="{name: 'agreement'}" rounded text color="red">
+                                <v-icon left>mdi-file-pdf</v-icon>
+                                agreement
+                            </v-btn>
+                        </v-card-title>
+                        <v-card-text class="">
+                            <p class="body-1">
+                                <v-icon left>mdi-calendar</v-icon>
+                                Date of birth: {{ getDate(farmer.date_of_birth) }}
+                            </p>
+                            <p class="body-1">
+                                <v-icon left>mdi-phone</v-icon>
+                                Phone number: {{ farmer.phone }}
+                            </p>
+                            <p class="body-1">
+                                <v-icon left>mdi-gender-male-female</v-icon>
+                                Gender: {{ farmer.gender }}
+                            </p>
+                            <p class="body-1">
+                                <v-icon left>mdi-map-marker</v-icon>
+                                Address: {{ farmer.community }}
+                            </p>
+                            <p class="body-1">
+                                <v-icon left>mdi-barn</v-icon>
+                                Farms:
+                                <v-btn color="success" rounded text :to="{name: 'farmer-farms', params: {farmer_id: farmer._id}}">
+                                    {{ farmer.farms }} <v-icon right>mdi-eye</v-icon>
+                                </v-btn>
+                            </p>
+                        </v-card-text>
+                    </v-col>
+                </v-row>
+                <v-divider/>
                 <v-card-text>
-                    <div class="">
-                        <p class="body-1">
-                            <v-icon left>mdi-calendar</v-icon>
-                            Date of birth: {{ getDate(farmer.date_of_birth) }}
-                        </p>
-                        <p class="body-1">
-                            <v-icon left>mdi-phone</v-icon>
-                            Phone number: {{ farmer.phone }}
-                        </p>
-                        <p class="body-1">
-                            <v-icon left>mdi-gender-male-female</v-icon>
-                            Gender: {{ farmer.gender }}
-                        </p>
-                        <p class="body-1">
-                            <v-icon left>mdi-map-marker</v-icon>
-                            Address: {{ farmer.community }}
-                        </p>
-                        <p class="body-1">
-                            <v-icon left>mdi-barn</v-icon>
-                            Farms: {{ farmer.farms }}
-                        </p>
-                    </div>
-                    <v-divider/>
                     <ul>
                         <li>Household status: {{ farmer.household_status }}</li>
                         <li>Number of dependents: {{ farmer.dependents_number }}</li>

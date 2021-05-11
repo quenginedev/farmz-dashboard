@@ -2,6 +2,7 @@
     <v-container>
         <v-card :loading="loading.list">
             <v-data-table
+                :search.sync="searchPhrase"
                 :headers="[
                     {text: 'Farm ID', value: 'farm_id'},
                     {text: 'Farmer', value: '_farmer_id'},
@@ -16,7 +17,7 @@
                     <v-toolbar flat rounded color="primary" dark>
                         <v-toolbar-title>Farms</v-toolbar-title>
                         <v-spacer/>
-                        <v-text-field placeholder="Search" prepend-inner-icon="mdi-magnify" hide-details filled rounded
+                        <v-text-field v-model="searchPhrase" placeholder="Search" prepend-inner-icon="mdi-magnify" hide-details filled rounded
                                       dense/>
                         <v-spacer/>
                         <v-btn rounded color="primary" large depressed :icon="isMobile" v-if="farmer_id">
@@ -101,6 +102,7 @@ export default {
         }
     },
     data: () => ({
+        searchPhrase: '',
         farms: [],
         show_edit: false,
         show_delete_alert: false,
