@@ -15,8 +15,10 @@
     "core-js": "^3.6.5",
     "dayjs": "^1.10.4",
     "firebase": "^8.4.3",
+    "uuid": "^8.3.2",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue2-google-maps": "^0.10.7",
     "vuetify": "^2.4.0",
     "vuex": "^3.4.0"
   },

@@ -6,7 +6,7 @@
                     {text: 'Farm ID', value: 'farm_id'},
                     {text: 'Farmer', value: '_farmer_id'},
                     {text: 'Name', value: 'name'},
-                    {text: 'Location', value: 'location'},
+                    {text: 'Location', value: 'location.address'},
                     {align: 'center', text: 'Farmer', value: 'farmer'},
                     {align: 'center', text: 'Action', value: 'action'},
                 ]"

@@ -162,12 +162,17 @@
                                         <v-text-field
                                             v-for="(location, index) in form.farm_location"
                                             :key="index"
-                                            v-model="form.farm_location[index]"
+                                            v-model="form.farm_location[index].address"
                                             label="Farm location"
+                                            readonly
+                                            @click="setOpenMapWithCallback((loc)=>{
+                                                form.farm_location[index] = loc
+                                                closeMap()
+                                            })"
                                             rounded filled>
                                             <v-icon color="primary" :disabled="!location"
                                                     v-if="form.farm_location.length - 1 === index"
-                                                    slot="append" @click="form.farm_location.push('')">mdi-plus
+                                                    slot="append" @click="form.farm_location.push({...MapObj})">mdi-plus
                                             </v-icon>
                                         </v-text-field>
                                     </v-col>
@@ -214,21 +219,41 @@
                 </v-stepper-items>
             </v-stepper>
         </v-card>
+        <v-dialog v-model="map.show">
+            <app-map @location="map.callback" @close="closeMap"/>
+        </v-dialog>
     </v-container>
 </template>
 
 <script>
 import {Plugins, CameraResultType} from '@capacitor/core'
 import {defineCustomElements} from '@ionic/pwa-elements/loader'
+import {v4 as uuid} from 'uuid'
+import AppMap from '@/components/MapWithPlaces'
 
 const {Camera} = Plugins
+const MapObj = {
+    address: '',
+    type: 'Point',
+    coordinates: []
+}
 
 export default {
     name: 'AddFarmer',
+    watch: {map(map){
+            console.log({map})
+        }},
+    components: {AppMap},
     data: () => ({
+        MapObj,
         step: 1,
         loading: true,
         show: { date_of_birth: false },
+        upload_image: {
+            ref: uuid(),
+            is_uploaded: false,
+            is_form_submitted: false
+        },
         options: {
             regions: [],
             employment_status: [
@@ -246,7 +271,15 @@ export default {
         },
         form: {
             picture: '',
-            farm_location: ['']
+            farm_location: [{
+                address: '',
+                type: 'Point',
+                coordinates: [{...MapObj}]
+            }]
+        },
+        map: {
+            show: false,
+            callback: null
         }
     }),
     methods: {
@@ -265,13 +298,37 @@ export default {
             })
         },
         async takePicture() {
-            const image = await Camera.getPhoto({
-                quality: 90,
+            const {dataUrl} = await Camera.getPhoto({
+                quality: 100,
                 allowEditing: true,
-                resultType: CameraResultType.DataUrl
+                resultType: CameraResultType.DataUrl,
             })
-
-            this.form.picture = image.dataUrl
+            const img_data = await fetch(dataUrl)
+            this.saveImage(await img_data.blob())
+        },
+        saveImage(image){
+            this.$firebase.storage().ref(`farmer_profiles/${this.upload_image.ref}`)
+                .put(image)
+                .then(result=>{
+                    return result.ref.getDownloadURL()
+                })
+                .then(url=>{
+                    this.form.picture = url
+                })
+        },
+        setOpenMapWithCallback(callback){
+            this.map = {
+                callback,
+                show: true
+            }
+        },
+        closeMap(){
+            console.log('close map')
+            this.map = {
+                show: false,
+                callback: ()=>{}
+            }
+            console.log(this.map)
         }
     },
 

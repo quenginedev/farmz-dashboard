@@ -5,10 +5,19 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import firebase from './plugins/firebase.plugin'
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 Vue.config.productionTip = false
 
 Vue.use(firebase)
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyDFXKA5uSSQqeY7R9XguoyE-syoagnEeT4',
+    libraries: 'places', // This is required if you use the Autocomplete plugin
+  },
+  installComponents: true
+})
+
 
 new Vue({
   router,

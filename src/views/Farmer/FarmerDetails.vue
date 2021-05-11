@@ -23,12 +23,13 @@
                         </p>
                         <p class="body-1">
                             <v-icon left>mdi-map-marker</v-icon>
-                            Community: {{ farmer.community }}
+                            Address: {{ farmer.community }}
                         </p>
                         <p class="body-1">
                             <v-icon left>mdi-barn</v-icon>
                             Farms: {{ farmer.farms }}
-                        </p>                    </div>
+                        </p>
+                    </div>
                     <v-divider/>
                     <ul>
                         <li>Household status: {{ farmer.household_status }}</li>
@@ -51,6 +52,7 @@
 <script>
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+
 dayjs.extend(relativeTime)
 
 export default {
@@ -63,7 +65,7 @@ export default {
         getDate(date) {
             return dayjs(date).format('DD MMM, YYYY')
         },
-        relativeTime(date){
+        relativeTime(date) {
             return dayjs(date).fromNow(true)
         }
     },
@@ -80,7 +82,7 @@ export default {
 </script>
 
 <style scoped>
-    li{
-        margin-top: 10px;
-    }
+li {
+    margin-top: 10px;
+}
 </style>
