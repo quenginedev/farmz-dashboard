@@ -5,7 +5,7 @@
             <v-card v-else-if="farmer" rounded="lg" class="mt-5">
                 <v-row justify="center" align="center">
                     <v-col cols="12" sm="6" md="4">
-                        <v-img  :src="farmer.picture"/>
+                        <v-img aspect-ratio="1" :src="farmer.picture"/>
                     </v-col>
                     <v-col col="12" sm="6" md="8">
                         <v-card-title class="justify-start text-h4">
