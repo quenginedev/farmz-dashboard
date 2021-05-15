@@ -6,6 +6,7 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import firebase from './plugins/firebase.plugin'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import VueQriously from 'vue-qriously'
 
 Vue.config.productionTip = false
 
@@ -17,7 +18,7 @@ Vue.use(VueGoogleMaps, {
   },
   installComponents: true
 })
-
+Vue.use(VueQriously)
 
 new Vue({
   router,

@@ -90,7 +90,7 @@
                     <h3>THE COCOA FARMER</h3>
                 </v-col>
             </v-row>
-            <v-row class="mb-10">
+            <v-row>
                 <v-col cols="6">
                     <p class="">TASTE COCOA GHANA LIMITED</p>
                     <p class="">P.O.Box AH 222 Achimota Accra</p>
@@ -105,12 +105,13 @@
                     <p class="text-uppercase">Farmer Region: {{farmer.region.region}}</p>
                 </v-col>
             </v-row>
-            <v-row class="mt-10">
+            <v-row align="end">
                 <v-col cols="6" class="">
                     <v-divider/>
                     <p class="font-weight-bold">Signature</p>
                 </v-col>
                 <v-col cols="6">
+                    <qriously :value="farmer._id" :foreground="$vuetify.theme.dark ? 'white' : 'black'" :size="120" />
                     <v-divider/>
                     <p class="font-weight-bold">Signature/ Finger Print</p>
                 </v-col>
