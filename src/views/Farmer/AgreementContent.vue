@@ -10,7 +10,7 @@
             </div>
             <v-spacer/>
             <v-card width="180" height="180" color="grey">
-                <v-img :src="farmer.picture"/>
+                <v-img aspect-ratio="1" :src="farmer.picture"/>
             </v-card>
         </v-card-title>
         <v-card-text class="mt-10">
