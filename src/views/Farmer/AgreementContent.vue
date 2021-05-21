@@ -2,6 +2,7 @@
     <v-card flat>
         <v-card-title class="">
             <div style="width: 420px;">
+                <v-img width="170" src="@/assets/logo.png"/>
                 COLLABORATION AGREEMENT BETWEEN
                 <p class="font-weight-bold text-h5 ma-0">TASTE COCOA GHANA LIMITED <span class="headline">AND</span>
                 </p>

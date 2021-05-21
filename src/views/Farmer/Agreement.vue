@@ -24,9 +24,13 @@ export default {
         }
     },
     methods: {
-        createPDF() {
-            const doc = document.getElementById('doc')
-            window.print()
+        async createPDF() {
+            if (this.$vuetify.theme.dark)
+                this.$vuetify.theme.dark = false
+            setTimeout(()=>{
+                const doc = document.getElementById('doc')
+                window.print()
+            }, 300)
         }
     },
     created() {
