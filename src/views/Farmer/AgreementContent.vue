@@ -19,13 +19,13 @@
                 <span class="font-weight-bold body-1">{{
                         dayjs(farmer.created_at || Date.now()).format('DD/MM/YYYY')
                     }}</span>
-                between Taste Cocoa Ghana Limited with its registered address of
-                Second Martey Tsuru Link No. 17, East Airport, Accra, P.O. BOX AH 222 Achimota Accra, Ghana
-                (hereinafter referred to as “<span class="font-weight-bold">THE COMPANY</span>”).
+                between Taste Cocoa Ghana Limited with its registered address of No. 33, Sir Arku Korsah Road, Airport
+                Residential, Accra, P.O. BOX AH 222 Achimota Accra, Ghana (hereinafter referred to as “<span
+                class="font-weight-bold">THE COMPANY</span>”).
             </p>
             <p>
                     <span class="font-weight-bold">
-                       {{farmer.full_name}}
+                       {{ farmer.full_name }}
                     </span>, A small scale, medium to large cocoa plantation farmer who earns their living from growing
                 and
                 selling cocoa beans and most recently cocoa pulp juice (hereinafter referred to as “<span
@@ -99,20 +99,21 @@
                 </v-col>
                 <v-col>
                     <p class="text-uppercase">Name: {{ farmer.full_name }}</p>
-                    <p class="text-uppercase">Gender: {{ farmer.gender}}</p>
+                    <p class="text-uppercase">Gender: {{ farmer.gender }}</p>
                     <p class="text-uppercase">Phone Number: {{ farmer.phone }}</p>
-                    <p class="text-uppercase">Farmer ID: {{farmer.farmer_id}}</p>
-                    <p class="text-uppercase">Farmer Community: {{farmer.community}}</p>
-                    <p class="text-uppercase">Farmer Region: {{farmer.region.region}}</p>
+                    <p class="text-uppercase">Farmer ID: {{ farmer.farmer_id }}</p>
+                    <p class="text-uppercase">Farmer Community: {{ farmer.community }}</p>
+                    <p class="text-uppercase">Farmer Region: {{ farmer.region.region }}</p>
                 </v-col>
             </v-row>
             <v-row align="end">
-                <v-col cols="6" class="">
+                <v-col cols="6" class="text-left">
+                    <v-img :src="require('@/assets/unnamed.png')" contain height="24"/>
                     <v-divider/>
                     <p class="font-weight-bold">Signature</p>
                 </v-col>
                 <v-col cols="6">
-                    <qriously :value="farmer._id" :foreground="$vuetify.theme.dark ? 'white' : 'black'" :size="120" />
+                    <qriously :value="farmer._id" :foreground="$vuetify.theme.dark ? 'white' : 'black'" :size="120"/>
                     <v-divider/>
                     <p class="font-weight-bold">Signature/ Finger Print</p>
                 </v-col>
