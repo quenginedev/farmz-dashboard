@@ -2,8 +2,9 @@
 
 import Vue from 'vue'
 import axios from 'axios'
+import configg from '@/config'
 
-const baseURL = process.env.NODE_ENV === 'production' ? 'https://farmzghana.herokuapp.com/' : 'http://localhost:4000'
+const baseURL = configg.serverURL
 console.log({baseURL})
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';

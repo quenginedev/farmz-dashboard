@@ -18,6 +18,11 @@
                             <v-icon left>mdi-plus</v-icon>
                             Add Farmer
                         </v-btn>
+                        <v-btn icon>
+                            <a :href="`${config.serverURL}/farmer/download`">
+                                <v-icon color="white">mdi-microsoft-excel</v-icon>
+                            </a>
+                        </v-btn>
                     </v-toolbar>
                 </template>
                 <template v-slot:item.avatar="{item}">
@@ -54,6 +59,7 @@
 <script>
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import config from '@/config'
 
 dayjs.extend(relativeTime)
 export default {
@@ -72,7 +78,9 @@ export default {
             {align: 'center', text: 'Farms', value: 'farms'},
             {align: 'center', text: 'Details', value: 'details'}
         ],
-        farmers: []
+        config,
+        farmers: [],
+        downloading: false
     }),
     methods: {
         getAge(date) {
@@ -86,6 +94,11 @@ export default {
             this.$axios.put(`/farmer/${item._id}`, {disabled: !item.disabled})
             item.disabled = !item.disabled
             item.disabling = !item.disabling
+        },
+        async downloadFarmersCSV(){
+            this.downloading = true
+            console.log(await this.$axios.get('/farmer/download'))
+            this.downloading = false
         }
     },
     mounted() {
