@@ -52,24 +52,33 @@
                     arises.
                 </li>
                 <li class="pl-5 ml-5 mt-1">
-                    The Company will make payment through its registered mobile money channel, where there is a
-                    network challenge
-                    the farmer will be paid cash.
+                    The Company sources the farmer’s fresh cocoa beans and purchases all buckets that meet all in bound
+                    check specifications per agreed quantity and quality standards in accordance with the Company’s
+                    policy. Where buckets are deemed to be rejected will not be paid for as per this agreement
                 </li>
                 <li class="pl-5 ml-5 mt-1">
-                    The cocoa farmer agrees to bring the buckets of cocoa beans with the bean taxi riders to
-                    pressing site before 3pm
-                    on production days, if not instructed differently by the Company.
+                    Both parties agreed to establish the minimum guaranteed price to be paid for each bucket. For the
+                    season 2021/2022, the purchase price is GHS 12.0 per bucket of a volume of 16L which may be subject
+                    to change when the need arises.
+
                 </li>
                 <li class="pl-5 ml-5 mt-1">
-                    The cocoa farmer is expected to do harvesting of the cocoa beans at most one day before breaking
-                    it.
+                    The Company will make payment through its registered mobile money channel, where there is a network
+                    challenge the farmer will be paid cash.
+
                 </li>
                 <li class="pl-5 ml-5 mt-1">
-                    The cocoa farmer will have to go through a mandatory training and assessment and strict
-                    adherence to hygiene and
-                    sustainable agricultural practices.
+                    The cocoa farmer agrees to bring the buckets of cocoa beans with the bean taxi riders to pressing
+                    site before 3pm on production days, if not instructed differently by the Company.
                 </li>
+                <li class="pl-5 ml-5 mt-1">
+                    The cocoa farmer is expected to do harvesting of the cocoa beans at most one day before breaking it.
+                </li>
+                <li class="pl-5 ml-5 mt-1">
+                    The cocoa farmer will have to go through a mandatory training and assessment and strict adherence to
+                    hygiene and sustainable agricultural practices.
+                </li>
+
             </ol>
             <h3 class="mt-10 mb-5">Duration of Agreement</h3>
             <ol type="A">
@@ -106,9 +115,9 @@
                     <p class="text-uppercase">Farmer Region: {{ farmer.region.region }}</p>
                 </v-col>
             </v-row>
-            <v-row align="end">
+            <v-row align="end" justify="start">
                 <v-col cols="6" class="text-left">
-                    <v-img :src="require('@/assets/unnamed.png')" contain height="24"/>
+                    <v-img :src="require('@/assets/unnamed.png')" aspect-ratio="4" width="142" />
                     <v-divider/>
                     <p class="font-weight-bold">Signature</p>
                 </v-col>
