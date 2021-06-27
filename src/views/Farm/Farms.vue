@@ -92,7 +92,7 @@
       </v-card>
     </v-dialog>
     <v-dialog v-model="map.show">
-      <app-map @location="map.callback" @close="closeMap"/>
+      <app-map :default-location="map.location" @location="map.callback" @close="closeMap"/>
     </v-dialog>
   </v-container>
 </template>
@@ -125,6 +125,7 @@ export default {
     editableFarm: {},
     map: {
       show: false,
+      location: {},
       callback: () => {
       }
     },
@@ -200,8 +201,10 @@ export default {
       this.map.show = false
     },
     showMap() {
+      console.log(this.editableFarm)
       this.map = {
         show: true,
+        location: this.editableFarm.location,
         callback: location => {
           this.editableFarm.location = location
           this.map.show = false
