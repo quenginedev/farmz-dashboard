@@ -7,7 +7,8 @@
                     {text: 'Farm ID', value: 'farm_id'},
                     {text: 'Farmer', value: '_farmer_id'},
                     {text: 'Name', value: 'name'},
-                    {text: 'Location', value: 'location.address'},
+                    {text: 'Location', value: 'location'},
+                    // {align: 'center', text: 'Farm', value: 'farm'},
                     {align: 'center', text: 'Farmer', value: 'farmer'},
                     {align: 'center', text: 'Action', value: 'action'},
                 ]"
@@ -33,16 +34,25 @@
           {{ item.name }}
         </template>
         <template v-slot:item.location="{item}">
-          {{ item.location }}
+          <v-btn @click="showMap(item)" text rounded>
+            <v-icon left>mdi-map</v-icon>
+            {{ item.location.address }}
+          </v-btn>
         </template>
         <template v-slot:item._farmer_id="{item}">
           {{ item._farmer_id.full_name }}
         </template>
+        <template v-slot:item.farm="{item}">
+          <v-btn text color="info" rounded>
+            <v-icon left>mdi-account-circle</v-icon>
+            View
+          </v-btn>
+        </template>
         <template v-slot:item.farmer="{item}">
           <v-btn :to="{name: 'farmer', params: {farmer_id: item._farmer_id._id}}" rounded text color="primary"
                  block>
-            <v-icon left>mdi-eye</v-icon>
-            View
+            <v-icon left>mdi-account-circle</v-icon>
+            Farmer
           </v-btn>
         </template>
 
@@ -65,7 +75,7 @@
         </v-card-title>
         <v-card-text>
           <v-text-field v-model="editableFarm.name" rounded filled label="Name"></v-text-field>
-          <v-text-field @click="showMap" readonly :value="editableFarm.location.address"
+          <v-text-field @click="showEditableMap" readonly :value="editableFarm.location.address"
                         rounded filled
                         label="Location"/>
           <v-btn @click="updateFarm" :loading="loading.updating" block color="primary" rounded large>
@@ -126,6 +136,7 @@ export default {
     map: {
       show: false,
       location: {},
+      editable: true,
       callback: () => {
       }
     },
@@ -200,17 +211,27 @@ export default {
     closeMap() {
       this.map.show = false
     },
-    showMap() {
-      console.log(this.editableFarm)
+    showEditableMap() {
       this.map = {
         show: true,
+        editable: true,
         location: this.editableFarm.location,
         callback: location => {
           this.editableFarm.location = location
           this.map.show = false
         }
       }
+    },
+    showMap(farm){
+      this.map = {
+        show: true,
+        editable: false,
+        location: farm.location,
+        callback: ()=>{}
+      }
     }
+
+
   },
   created() {
     this.fetchFarms()

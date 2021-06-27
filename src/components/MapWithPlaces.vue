@@ -4,7 +4,9 @@
       <template v-slot:activator="{on}">
         <v-text-field :loading="placesSuggestionsLoading" v-model="placesSearchPhrase"
                       @keypress.enter="searchPlaces" hide-details filled
-                      placeholder="search place">
+                      placeholder="search place"
+                      :readonly="!isEditable"
+        >
           <v-icon slot="prepend-inner">mdi-crosshairs-gps</v-icon>
           <v-icon @click="searchPlaces" slot="append">mdi-magnify</v-icon>
           <v-icon @click="$emit('close')" slot="append-outer" left>mdi-close</v-icon>
@@ -39,7 +41,7 @@
     >
       <gmap-marker :position="mapMarker"></gmap-marker>
     </gmap-map>
-    <v-btn :loading="placesSuggestionsLoading" @click="confirmLocation" block x-large color="primary">Continue
+    <v-btn v-if="isEditable" :loading="placesSuggestionsLoading" @click="confirmLocation" block x-large color="primary">Continue
     </v-btn>
   </v-card>
 </template>
@@ -55,6 +57,10 @@ export default Vue.extend({
   props: {
     defaultLocation: {
       type: Object
+    },
+    isEditable: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
